@@ -41,7 +41,7 @@ public:
 
 	void enqueue(BinaryNode* item) {
 		if (isFull()) {
-			cout << "error: Æ÷È­»óÅÂ" << endl;
+			cout << "error: í¬í™”ìƒíƒœ" << endl;
 			exit(-1);
 		}
 		rear = (rear + 1) % MAX_SIZE;
@@ -50,7 +50,7 @@ public:
 
 	BinaryNode* dequeue() {
 		if (isEmpty()) {
-			cout << "error: °ø¹é»óÅÂ" << endl;
+			cout << "error: ê³µë°±ìƒíƒœ" << endl;
 			exit(-1);
 		}
 		front = (front + 1) % MAX_SIZE;
@@ -59,7 +59,7 @@ public:
 
 	BinaryNode* peek() {
 		if (isEmpty()) {
-			cout << "error: °ø¹é»óÅÂ" << endl;
+			cout << "error: ê³µë°±ìƒíƒœ" << endl;
 		}
 		else {
 			return data[(front + 1) % MAX_SIZE];
@@ -73,6 +73,7 @@ public:
 		cout << endl;
 	}
 };
+
 
 class BinaryTree {
 protected:
@@ -106,17 +107,17 @@ public:
 	}
 
 
-	//Æ®¸®ÀÇ ³ëµå °³¼ö
+	//íŠ¸ë¦¬ì˜ ë…¸ë“œ ê°œìˆ˜
 	int getCount(BinaryNode* node);
-	//´Ü¸»³ëµåÀÇ °³¼ö
+	//ë‹¨ë§ë…¸ë“œì˜ ê°œìˆ˜
 	int getLeafCount(BinaryNode* node);
-	//Æ®¸®ÀÇ ³ôÀÌ(ÃÖ´ë ·¹º§)
+	//íŠ¸ë¦¬ì˜ ë†’ì´(ìµœëŒ€ ë ˆë²¨)
 	int getHeight(BinaryNode* node);
-	//Æ÷È­ ¿©ºÎ
+	//í¬í™” ì—¬ë¶€
 	bool isFull(BinaryNode* node);
 	int calcLevel(BinaryNode* node, int n, int level);
 
-	//Æ®¸® ¼øÈ¸
+	//íŠ¸ë¦¬ ìˆœíšŒ
 	void inorder() { printf(" \n inorder: "); inorder(root); }
 	void preorder() { printf("\n preorder: "); preorder(root); }
 	void postorder() { printf("\n postorder: "); postorder(root); }
@@ -151,19 +152,19 @@ bool BinaryTree::isFull(BinaryNode* node) {
 	else return false;
 }
 
-//n°ú ÀÏÄ¡ÇÏ´Â ³ëµåÀÇ ·¹º§ ¹İÈ¯
+//nê³¼ ì¼ì¹˜í•˜ëŠ” ë…¸ë“œì˜ ë ˆë²¨ ë°˜í™˜
 int BinaryTree::calcLevel(BinaryNode* node, int n, int level) {
 	if (node == NULL) return 0;
 	if (node->data == n) return level;
-	//¿ŞÂÊ ¼­ºê Æ®¸® Å½»ö
+	//ì™¼ìª½ ì„œë¸Œ íŠ¸ë¦¬ íƒìƒ‰
 	int ll = calcLevel(node->left, n, level + 1);
 	if (ll != 0) return ll;
-	//¿À¸¥ÂÊ ¼­ºê Æ®¸® Å½»ö
+	//ì˜¤ë¥¸ìª½ ì„œë¸Œ íŠ¸ë¦¬ íƒìƒ‰
 	ll = calcLevel(node->right, n, level + 1);
 	return ll;
 }
 
-//ÁßÀ§ ¼øÈ¸
+//ì¤‘ìœ„ ìˆœíšŒ
 void BinaryTree::inorder(BinaryNode* node) {
 	if (node != NULL) {
 		if (node->getLeft() != NULL)
@@ -174,7 +175,7 @@ void BinaryTree::inorder(BinaryNode* node) {
 	}
 }
 
-//ÀüÀ§ ¼øÈ¸
+//ì „ìœ„ ìˆœíšŒ
 void BinaryTree::preorder(BinaryNode* node) {
 	if (node != NULL) {
 		printf(" [%d] ", node->getData());
@@ -199,13 +200,13 @@ void BinaryTree::levelorder() {
 	CircularQueue q;
 	printf("\n levelorder: ");
 	if (!isEmpty()) {
-		q.enqueue(root); //·çÆ® ³ëµå »ğÀÔ
+		q.enqueue(root); //ë£¨íŠ¸ ë…¸ë“œ ì‚½ì…
 		while (!q.isEmpty()) {
 			BinaryNode* n = q.dequeue();
 			if (n != NULL) {
-				printf(" [%d] ", n->getData()); //Å¥ ¾ÈÀÇ ³ëµå Ãâ·Â
-				q.enqueue(n->getLeft()); //ÇØ´ç ³ëµåÀÇ ¿ŞÂÊ ³ëµå »ğÀÔ
-				q.enqueue(n->getRight()); //ÇØ´ç ³ëµåÀÇ ¿À¸¥ÂÊ ³ëµå »ğÀÔ
+				printf(" [%d] ", n->getData()); //í ì•ˆì˜ ë…¸ë“œ ì¶œë ¥
+				q.enqueue(n->getLeft()); //í•´ë‹¹ ë…¸ë“œì˜ ì™¼ìª½ ë…¸ë“œ ì‚½ì…
+				q.enqueue(n->getRight()); //í•´ë‹¹ ë…¸ë“œì˜ ì˜¤ë¥¸ìª½ ë…¸ë“œ ì‚½ì…
 			}
 		}
 	}
@@ -230,11 +231,11 @@ public:
 BinaryNode* BinSrchTree::search(int key) {
 	BinaryNode* node = search(root, key);
 	if (node != NULL) {
-		cout << "Å½»ö ¼º°ø: Å° °ªÀÌ " << node->getData()
-			<< " ÀÎ ³ëµå=0x" << node << endl;
+		cout << "íƒìƒ‰ ì„±ê³µ: í‚¤ ê°’ì´ " << node->getData()
+			<< " ì¸ ë…¸ë“œ=0x" << node << endl;
 	}
 	else
-		cout << "Å½»ö ½ÇÆĞ: Å° °ªÀÌ " << key << "ÀÎ ³ëµå ¾øÀ½" << endl;
+		cout << "íƒìƒ‰ ì‹¤íŒ¨: í‚¤ ê°’ì´ " << key << "ì¸ ë…¸ë“œ ì—†ìŒ" << endl;
 	return node;
 }
 
@@ -244,10 +245,10 @@ BinaryNode* BinSrchTree::search(BinaryNode* n, int key) {
 		return NULL;
 	if (key == n->getData())
 		return n;
-	else if (key < n->getData()) //Å° °ªÀÌ ·çÆ®º¸´Ù ÀÛÀ¸¸é
-		return search(n->getLeft(), key); //¿ŞÂÊ ¼­ºê Æ®¸® Å½»ö
-	else  //Å° °ª>·çÆ®
-		return search(n->getRight(), key); //¿À¸¥ÂÊ ¼­ºê Æ®¸® Å½»ö
+	else if (key < n->getData()) //í‚¤ ê°’ì´ ë£¨íŠ¸ë³´ë‹¤ ì‘ìœ¼ë©´
+		return search(n->getLeft(), key); //ì™¼ìª½ ì„œë¸Œ íŠ¸ë¦¬ íƒìƒ‰
+	else  //í‚¤ ê°’>ë£¨íŠ¸
+		return search(n->getRight(), key); //ì˜¤ë¥¸ìª½ ì„œë¸Œ íŠ¸ë¦¬ íƒìƒ‰
 }
 
 
@@ -259,16 +260,16 @@ void BinSrchTree::insert(BinaryNode* n) {
 
 
 //recursion
-//·çÆ®³ëµå, »ğÀÔÇÏ·Á´Â ³ëµå
+//ë£¨íŠ¸ë…¸ë“œ, ì‚½ì…í•˜ë ¤ëŠ” ë…¸ë“œ
 void BinSrchTree::insert(BinaryNode* r, BinaryNode* n) {
 	if (n->getData() == r->getData()) return;
-	else if (n->getData() < r->getData()) { //»ğÀÔ ³ëµå<·çÆ®³ëµå
+	else if (n->getData() < r->getData()) { //ì‚½ì… ë…¸ë“œ<ë£¨íŠ¸ë…¸ë“œ
 		if (r->getLeft() == NULL)
 			r->setLeft(n);
 		else
 			insert(r->getLeft(), n);
 	}
-	else { //»ğÀÔ³ëµå> ·çÆ®³ëµå
+	else { //ì‚½ì…ë…¸ë“œ> ë£¨íŠ¸ë…¸ë“œ
 		if (r->getRight() == NULL)
 			r->setRight(n);
 		else insert(r->getRight(), n);
@@ -279,53 +280,53 @@ void BinSrchTree::remove(int key) {
 	if (isEmpty()) return;
 	BinaryNode* parent = NULL;
 	BinaryNode* node = root;
-	//key°ªÀ» °®´Â ³ëµå Å½»ö
+	//keyê°’ì„ ê°–ëŠ” ë…¸ë“œ íƒìƒ‰
 	while (node != NULL && node->getData() != key) {
 		parent = node;
-		//Å°¿Í ·çÆ® ³ëµåÀÇ Å©±â ºñ±³ÇÏ¿© Å½»ö ¹æÇâ °áÁ¤
+		//í‚¤ì™€ ë£¨íŠ¸ ë…¸ë“œì˜ í¬ê¸° ë¹„êµí•˜ì—¬ íƒìƒ‰ ë°©í–¥ ê²°ì •
 		node = (key < node->getData()) ? node->getLeft() : node->getRight();
 	}
-	//´Ü¸»±îÁö µµ´ŞÇß´Âµ¥µµ key¸¦ ¸ø Ã£Àº °æ¿ì
+	//ë‹¨ë§ê¹Œì§€ ë„ë‹¬í–ˆëŠ”ë°ë„ keyë¥¼ ëª» ì°¾ì€ ê²½ìš°
 	if (node == NULL) {
-		printf(" ¿À·ù: Å°°¡ Æ®¸®¿¡ ¾ø½À´Ï´Ù.\n");
+		printf(" ì˜¤ë¥˜: í‚¤ê°€ íŠ¸ë¦¬ì— ì—†ìŠµë‹ˆë‹¤.\n");
 	}
 	else remove(parent, node);
 }
 void BinSrchTree::remove(BinaryNode* parent, BinaryNode* node) {
-	// i) »èÁ¦ ³ëµå°¡ ´Ü¸»³ëµå
+	// i) ì‚­ì œ ë…¸ë“œê°€ ë‹¨ë§ë…¸ë“œ
 	if (node->isLeaf()) {
 		if (parent == NULL)
 			root = NULL;
-		else { //ºÎ¸ğ ³ëµå°¡ Á¸ÀçÇÒ ¶§
-			if (parent->getLeft() == node) //»èÁ¦ÇÒ ³ëµå°¡ ºÎ¸ğÀÇ ¿ŞÂÊ ÀÚ½Ä
-				parent->setLeft(NULL); //¿¬°á ²÷À½
-			else  //»èÁ¦ÇÏ·Á´Â ³ëµå°¡ ºÎ¸ğÀÇ ¿À¸¥ÂÊ ÀÚ½Ä
+		else { //ë¶€ëª¨ ë…¸ë“œê°€ ì¡´ì¬í•  ë•Œ
+			if (parent->getLeft() == node) //ì‚­ì œí•  ë…¸ë“œê°€ ë¶€ëª¨ì˜ ì™¼ìª½ ìì‹
+				parent->setLeft(NULL); //ì—°ê²° ëŠìŒ
+			else  //ì‚­ì œí•˜ë ¤ëŠ” ë…¸ë“œê°€ ë¶€ëª¨ì˜ ì˜¤ë¥¸ìª½ ìì‹
 				parent->setRight(NULL);
 		}
 	}
-	// ii) »èÁ¦ ³ëµå¿¡ ¿ŞÂÊ ÀÚ½Ä È¤Àº ¿À¸¥ÂÊ ÀÚ½Ä Á¸Àç
+	// ii) ì‚­ì œ ë…¸ë“œì— ì™¼ìª½ ìì‹ í˜¹ì€ ì˜¤ë¥¸ìª½ ìì‹ ì¡´ì¬
 	else if (node->getLeft() == NULL || node->getRight() == NULL) {
 		BinaryNode* child = (node->getLeft() != NULL) ?
-			node->getLeft() : node->getRight(); //ÀÚ½Ä ³ëµå ¼³Á¤
-		// »èÁ¦ÇÏ·Á´Â ³ëµå°¡ ·çÆ®³ëµå
+			node->getLeft() : node->getRight(); //ìì‹ ë…¸ë“œ ì„¤ì •
+		// ì‚­ì œí•˜ë ¤ëŠ” ë…¸ë“œê°€ ë£¨íŠ¸ë…¸ë“œ
 		if (node == root)
 			root = child;
 		else {
-			if (parent->getLeft() == node) //ºÎ¸ğÀÇ ¿ŞÂÊ¿¡ ³ëµå Á¸Àç
-				parent->setLeft(child); //ºÎ¸ğ¿Í ÀÚ¼Õ ¿¬°á
-			else //ºÎ¸ğÀÇ ¿À¸¥ÂÊ¿¡ ³ëµå Á¸Àç
+			if (parent->getLeft() == node) //ë¶€ëª¨ì˜ ì™¼ìª½ì— ë…¸ë“œ ì¡´ì¬
+				parent->setLeft(child); //ë¶€ëª¨ì™€ ìì† ì—°ê²°
+			else //ë¶€ëª¨ì˜ ì˜¤ë¥¸ìª½ì— ë…¸ë“œ ì¡´ì¬
 				parent->setRight(child);
 		}
 	}
-	// iii) »èÁ¦ ³ëµå°¡ 2°³ÀÇ ¼­ºêÆ®¸® °¡Áü
+	// iii) ì‚­ì œ ë…¸ë“œê°€ 2ê°œì˜ ì„œë¸ŒíŠ¸ë¦¬ ê°€ì§
 	else {
 		BinaryNode* succp;
 		BinaryNode* succ;
 
 		BinaryNode* Lsuccp = node;
 		BinaryNode* Lsucc = node->getRight();
-		//ÇÑ ¹ø ¿À¸¥ÂÊÀ¸·Î °¡°í °è¼Ó ¿ŞÂÊÀ¸·Î °¡¸é leftmost node
-		//leftmost node: ¿À¸¥ÂÊ ¼­ºêÆ®¸® Áß °¡Àå ¿ŞÂÊÀÇ ³ëµå
+		//í•œ ë²ˆ ì˜¤ë¥¸ìª½ìœ¼ë¡œ ê°€ê³  ê³„ì† ì™¼ìª½ìœ¼ë¡œ ê°€ë©´ leftmost node
+		//leftmost node: ì˜¤ë¥¸ìª½ ì„œë¸ŒíŠ¸ë¦¬ ì¤‘ ê°€ì¥ ì™¼ìª½ì˜ ë…¸ë“œ
 		while (Lsucc->getLeft() != NULL) {
 			Lsuccp = Lsucc;
 			Lsucc = Lsucc->getLeft();
@@ -333,43 +334,43 @@ void BinSrchTree::remove(BinaryNode* parent, BinaryNode* node) {
 
 		BinaryNode* Rsuccp = node;
 		BinaryNode* Rsucc = node->getLeft();
-		//ÇÑ ¹ø ¿ŞÂÊÀ¸·Î °¡°í °è¼Ó ¿À¸¥ÂÊÀ¸·Î °¡¸é rightmost node
+		//í•œ ë²ˆ ì™¼ìª½ìœ¼ë¡œ ê°€ê³  ê³„ì† ì˜¤ë¥¸ìª½ìœ¼ë¡œ ê°€ë©´ rightmost node
 		while (Rsucc->getRight() != NULL) {
 			Rsuccp = Rsucc;
 			Rsucc = Rsucc->getRight();
 		}
 		
-		// 2. ¿¬°á
-		//leftmost¿Í rightmost Áß »èÁ¦ÇÏ·Á´Â ³ëµå¿Í Â÷ÀÌ ´õ ÀûÀº ³ëµå °í¸§
+		// 2. ì—°ê²°
+		//leftmostì™€ rightmost ì¤‘ ì‚­ì œí•˜ë ¤ëŠ” ë…¸ë“œì™€ ì°¨ì´ ë” ì ì€ ë…¸ë“œ ê³ ë¦„
 		if (Lsucc->getData() - node->getData() <= node->getData() - Rsucc->getData()) {
 			succp = Lsuccp;
 			succ = Lsucc;
-			//leftmost ³ëµå°¡ ºÎ¸ğ³ëµåÀÇ ¿ŞÂÊ¿¡ ÀÖÀ½
+			//leftmost ë…¸ë“œê°€ ë¶€ëª¨ë…¸ë“œì˜ ì™¼ìª½ì— ìˆìŒ
 			if (succp->getLeft() == succ)
-				//leftmostÀÇ ºÎ¸ğ¿Í ÀÚ½Ä ¿¬°á
-				succp->setLeft(succ->getRight());//leftmost ³ëµåÀÌ¹Ç·Î ¿À¸¥ÂÊ ÀÚ½Ä³ëµå¹Û¿¡ ¾øÀ½
+				//leftmostì˜ ë¶€ëª¨ì™€ ìì‹ ì—°ê²°
+				succp->setLeft(succ->getRight());//leftmost ë…¸ë“œì´ë¯€ë¡œ ì˜¤ë¥¸ìª½ ìì‹ë…¸ë“œë°–ì— ì—†ìŒ
 
-			else //leftmost ³ëµå°¡ ºÎ¸ğ³ëµåÀÇ ¿À¸¥ÂÊ¿¡ ÀÖÀ½
+			else //leftmost ë…¸ë“œê°€ ë¶€ëª¨ë…¸ë“œì˜ ì˜¤ë¥¸ìª½ì— ìˆìŒ
 				succp->setRight(succ->getRight());
 		}
 		else {
 			succp = Rsuccp;
 			succ = Rsucc;
-			if (succp->getLeft() == succ) //succp ¿ŞÂÊ ÀÚ½Ä¿¡ rightmost ³ëµå°¡ ÀÖÀ» °æ¿ì(¿À¸¥ÂÊ ÀÚ½Ä ¾øÀ½)
+			if (succp->getLeft() == succ) //succp ì™¼ìª½ ìì‹ì— rightmost ë…¸ë“œê°€ ìˆì„ ê²½ìš°(ì˜¤ë¥¸ìª½ ìì‹ ì—†ìŒ)
 				succp->setLeft(succ->getLeft());
-			else //succp ¿À¸¥ÂÊ ÀÚ½Ä¿¡ rightmost³ëµå°¡ ÀÖÀ» °æ¿ì (¿ŞÂÊ ÀÚ½Ä ÀÖÀ» ¼ö ÀÖÀ½)
+			else //succp ì˜¤ë¥¸ìª½ ìì‹ì— rightmostë…¸ë“œê°€ ìˆì„ ê²½ìš° (ì™¼ìª½ ìì‹ ìˆì„ ìˆ˜ ìˆìŒ)
 				succp->setRight(succ->getLeft());
 				
 		}
 
-		// 3. º¹»ç
-		//È¿À²À» À§ÇØ »èÁ¦ÇÒ ³ëµåÀÇ µ¥ÀÌÅÍ °ª¸¸ ¹Ù²Ş
-		//(ÀÚ½Ä µ¥ÀÌÅÍ¸¦ µ¤¾î¾¸)
+		// 3. ë³µì‚¬
+		//íš¨ìœ¨ì„ ìœ„í•´ ì‚­ì œí•  ë…¸ë“œì˜ ë°ì´í„° ê°’ë§Œ ë°”ê¿ˆ
+		//(ìì‹ ë°ì´í„°ë¥¼ ë®ì–´ì”€)
 		node->setData(succ->getData());
 		node = succ;
 	}
-	//4. »èÁ¦
-	//°ª º¹»çÇÑ ÈÄ »èÁ¦
+	//4. ì‚­ì œ
+	//ê°’ ë³µì‚¬í•œ í›„ ì‚­ì œ
 	delete node;
 }
 
@@ -387,23 +388,23 @@ int main() {
 	tree.insert(new BinaryNode(99));
 	printf("\n <Original BST> : ");
 	tree.levelorder();
-	printf(" »èÁ¦: case 1 ==> ³ëµå  3 »èÁ¦ :");
+	printf(" ì‚­ì œ: case 1 ==> ë…¸ë“œ  3 ì‚­ì œ :");
 	tree.remove(3);
 	tree.levelorder();
-	printf(" »èÁ¦: case 2 ==> ³ëµå 68 »èÁ¦ : ");
+	printf(" ì‚­ì œ: case 2 ==> ë…¸ë“œ 68 ì‚­ì œ : ");
 	tree.remove(68);
 	tree.levelorder();
-	printf(" »èÁ¦: case 3 ==> ³ëµå 18 »èÁ¦ : ");
+	printf(" ì‚­ì œ: case 3 ==> ë…¸ë“œ 18 ì‚­ì œ : ");
 	tree.remove(18);
 	tree.levelorder();
-	printf(" »èÁ¦: case 3 ==> ³ëµå 35 »èÁ¦ (·çÆ® ³ëµå »èÁ¦) :  ");
+	printf(" ì‚­ì œ: case 3 ==> ë…¸ë“œ 35 ì‚­ì œ (ë£¨íŠ¸ ë…¸ë“œ ì‚­ì œ) :  ");
 	tree.remove(35);
 	tree.levelorder();
 
 
-	// ÃÖÁ¾ Æ®¸® Á¤º¸ Ãâ·Â
-	printf("\n <ÃÖÁ¾ BST Á¤º¸ Ãâ·Â> \n");
-	printf(" ³ëµåÀÇ °³¼ö = %d\n", tree.getCount());
-	printf(" ´Ü¸»ÀÇ °³¼ö = %d\n", tree.getLeafCount());
-	printf(" Æ®¸®ÀÇ ³ôÀÌ = %d\n", tree.getHeight());
+	// ìµœì¢… íŠ¸ë¦¬ ì •ë³´ ì¶œë ¥
+	printf("\n <ìµœì¢… BST ì •ë³´ ì¶œë ¥> \n");
+	printf(" ë…¸ë“œì˜ ê°œìˆ˜ = %d\n", tree.getCount());
+	printf(" ë‹¨ë§ì˜ ê°œìˆ˜ = %d\n", tree.getLeafCount());
+	printf(" íŠ¸ë¦¬ì˜ ë†’ì´ = %d\n", tree.getHeight());
 }
