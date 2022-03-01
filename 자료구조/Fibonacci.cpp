@@ -1,4 +1,4 @@
-/*#include <iostream>
+#include <iostream>
 using namespace std;
 int fib(int n) {
 	if (n == 0) return 0;
@@ -13,4 +13,4 @@ int fact(int n) {
 int main() {
 	cout << fib(6) << endl;
 	cout << fact(6) << endl;
-}*/
+}
