@@ -27,4 +27,5 @@ int main() {
         hotel(H, W, N);
     }
     return 0;
+    
 }
